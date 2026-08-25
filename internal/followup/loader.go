@@ -18,11 +18,12 @@ func LoadFromFile(path string) (LoadResult, error) {
 		return LoadResult{Notice: FormatNotice(err)}, err
 	}
 	defer workbook.Close()
-	headerErr := validateWorkbookHeaders(workbook)
-	records, rowsErr := excel.ReadRecords(workbook.File)
-	headerErr = rowsErr
-	if headerErr != nil {
-		return LoadResult{Notice: FormatNotice(headerErr)}, headerErr
+	if err := validateWorkbookHeaders(workbook); err != nil {
+		return LoadResult{Notice: FormatNotice(err)}, err
+	}
+	records, err := excel.ReadRecords(workbook.File)
+	if err != nil {
+		return LoadResult{Notice: FormatNotice(err)}, err
 	}
 	return LoadResult{Records: records, Notice: FormatNotice(nil)}, nil
 }
