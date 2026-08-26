@@ -1,0 +1,13 @@
+:root { font-family: system-ui, sans-serif; color: #20252b; background: #f3f5f7; }
+body { margin: 0; }
+header { padding: 24px 6vw; background: #123c4a; color: #fff; }
+header h1 { margin: 0; font-size: 28px; }
+main { max-width: 1100px; margin: 24px auto; padding: 0 20px; }
+.metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.metrics article, .panel { background: #fff; border: 1px solid #d7dee3; border-radius: 6px; padding: 18px; }
+.metrics article { display: grid; gap: 6px; }
+.metrics strong { font-size: 28px; color: #d25a34; }
+.panel { margin-top: 16px; }
+.panel h2 { margin-top: 0; }
+#reminders p, #records article { padding: 10px 0; border-bottom: 1px solid #e5e9ec; }
+#records article { display: flex; gap: 24px; flex-wrap: wrap; }

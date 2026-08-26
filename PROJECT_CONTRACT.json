@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "metrics": {
+    "production_loc": 2367,
+    "production_files": 36,
+    "production_packages": 9,
+    "test_files": 13,
+    "production_functions": 153,
+    "decision_points": 364
+  },
+  "persistence": {
+    "module": "modernc.org/sqlite",
+    "entities": [
+      "Client",
+      "ServiceType",
+      "Caregiver",
+      "FollowUpRecord",
+      "Satisfaction",
+      "ReminderSetting",
+      "AuditEntry"
+    ],
+    "reopen_test": "TestPersistenceSurvivesReopen"
+  },
+  "workflows": [
+    {
+      "steps": [
+        "打开回访文件",
+        "校验必需表头",
+        "解析客户回访行",
+        "显示格式错误并阻止加载"
+      ],
+      "test": "TestFollowupHeaderError"
+    },
+    {
+      "steps": [
+        "校验客户服务阿姨和满意度",
+        "追加 Excel 回访行",
+        "写入 SQLite 索引",
+        "记录审计并刷新列表"
+      ],
+      "test": "TestPrimaryWorkflow"
+    },
+    {
+      "steps": [
+        "按满意度和日期排序",
+        "计算提醒和七日日历",
+        "提供看板和详情 API",
+        "渲染前端指标和客户行"
+      ],
+      "test": "TestHTTPWorkflow"
+    }
+  ]
+}
